@@ -20,7 +20,7 @@ namespace WebRT.Platform.Host
         /// Get provider's instance
         /// </summary>
         /// <returns></returns>
-        private static HostConfigurationProvider GetInstance()
+        public static HostConfigurationProvider GetInstance()
         {
             if (Instance == null)
             {

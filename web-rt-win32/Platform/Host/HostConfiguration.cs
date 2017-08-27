@@ -13,6 +13,7 @@ namespace WebRT.Platform.Host
         /// </summary>
         public string GlobalPackagesLocation { get; set; }
         public string LocalPackagesLocation { get; set; }
+        public string SystemPackagesLocation { get; set; }
         public bool DebugModeEnabled { get; set; }
 
         public static readonly string LocalRootDirectoryName = ".webrt";
@@ -20,7 +21,8 @@ namespace WebRT.Platform.Host
 
         public HostConfiguration()
         {
-            this.GlobalPackagesLocation = FormatPath(AppDomain.CurrentDomain.BaseDirectory, PackagesDirectoryName);
+            this.SystemPackagesLocation = FormatPath(AppDomain.CurrentDomain.BaseDirectory, PackagesDirectoryName);
+            this.GlobalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), PackagesDirectoryName);
             this.LocalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), PackagesDirectoryName);
         }
 
