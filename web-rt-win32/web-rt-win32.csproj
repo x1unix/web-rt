@@ -78,8 +78,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Platform\Host\HostConfiguration.cs" />
+    <Compile Include="Platform\Host\HostConfigurationProvider.cs" />
     <Compile Include="Platform\Host\TrayNotifier.cs" />
     <Compile Include="Platform\Integration\Runtime.cs" />
+    <Compile Include="Platform\Packages\AppManifest.cs" />
+    <Compile Include="Platform\Packages\WebManifest.cs" />
+    <Compile Include="Platform\Packages\WebManifestIcon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -115,6 +120,9 @@
     <None Include="Resources\web-rt.ico" />
     <Content Include="TextTemplate.ico" />
     <Content Include="web-rt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Foundation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" />
