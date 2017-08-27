@@ -59,11 +59,16 @@
     <ApplicationIcon>web-rt.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +91,11 @@
     <Compile Include="Platform\Host\CrashReportWindow.Designer.cs">
       <DependentUpon>CrashReportWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Platform\Integration\ClientInjector.cs" />
+    <Compile Include="Platform\Integration\Injectable.cs" />
+    <Compile Include="Platform\Integration\LauncherBinder.cs" />
+    <Compile Include="Platform\Loader.cs" />
+    <Compile Include="Platform\Packages\AppWindowDefinition.cs" />
     <Compile Include="Platform\Runtime\ApplicationHost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,7 +108,7 @@
     <Compile Include="Platform\Host\HostConfiguration.cs" />
     <Compile Include="Platform\Host\HostConfigurationProvider.cs" />
     <Compile Include="Platform\Host\TrayNotifier.cs" />
-    <Compile Include="Platform\Integration\Runtime.cs" />
+    <Compile Include="Platform\Integration\PackageManagerBinder.cs" />
     <Compile Include="Platform\Packages\AppManifest.cs" />
     <Compile Include="Platform\Packages\AppIcon.cs" />
     <Compile Include="Platform\Packages\PackageCache.cs" />
@@ -128,6 +138,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="StockData\Applications\com.webrt.files\application.json" />
     <None Include="StockData\Applications\com.webrt.launcher\application.json" />
     <None Include="packages.config" />
     <None Include="Platform\Packages\AppManifest.json" />
@@ -145,7 +156,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StockData\Applications\com.webrt.files\index.html" />
+    <Content Include="StockData\Applications\com.webrt.files\styles.css" />
+    <Content Include="StockData\Applications\com.webrt.launcher\app.js" />
+    <Content Include="StockData\Applications\com.webrt.launcher\AppIcon.png" />
     <Content Include="StockData\Applications\com.webrt.launcher\index.html" />
+    <Content Include="StockData\Applications\com.webrt.launcher\karkas.min.js" />
+    <Content Include="StockData\Applications\com.webrt.launcher\styles.css" />
     <None Include="Resources\AppIconXS.ico" />
     <None Include="Resources\AppIcon.ico" />
     <None Include="Resources\web-rt.ico" />

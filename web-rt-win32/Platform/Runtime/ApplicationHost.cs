@@ -11,6 +11,8 @@ using CefSharp;
 using CefSharp.WinForms;
 using WebRT.Foundation;
 using WebRT.Platform.Packages;
+using WebRT.Platform.Integration;
+using WebRT.Platform.Host;
 
 namespace WebRT.Platform.Runtime
 {
@@ -32,6 +34,8 @@ namespace WebRT.Platform.Runtime
         public string Label;
         
         private bool WasClosed = false;
+
+        private Injectable[] InjectedItems;
 
         public ApplicationHost(ApplicationProcess process)
         {
@@ -58,9 +62,36 @@ namespace WebRT.Platform.Runtime
                 Dock = DockStyle.Fill
             };
 
+            ApplyDependencies();
+
+            WebView.IsBrowserInitializedChanged += OnWebViewInitialised;
+
             // Add it to the form and fill it to the form window.
             this.Controls.Add(WebView);
 
+        }
+
+        private void ApplyDependencies()
+        {
+            foreach (Injectable dependency in InjectedItems)
+            {
+                // RegisterJsObject
+                if (dependency.Async)
+                {
+                    WebView.RegisterAsyncJsObject(dependency.Name, dependency, BindingOptions.DefaultBinder);
+                } else
+                {
+                    WebView.RegisterJsObject(dependency.Name, dependency, BindingOptions.DefaultBinder);
+                }
+            }
+        }
+
+        public void DefineDependencies(Injectable[] injectables)
+        {
+            if (InjectedItems == null)
+            {
+                InjectedItems = injectables;
+            }
         }
 
         private void OnProcessCreated(ApplicationProcess process, EventArgs e)
@@ -70,6 +101,15 @@ namespace WebRT.Platform.Runtime
             Show();
 
             ApplyStyles();
+            
+        }
+
+        private void OnWebViewInitialised(object sender, IsBrowserInitializedChangedEventArgs e)
+        {
+            if (HostConfigurationProvider.GetInstance().GetConfiguration().DebugModeEnabled)
+            {
+                WebView.ShowDevTools();
+            }
         }
 
         private void ApplyStyles()

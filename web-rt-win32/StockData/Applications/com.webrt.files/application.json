@@ -1,0 +1,15 @@
+﻿{
+  "name": "Files",
+  "version": "1.0.0",
+  "domain": "com.webrt.files",
+  "mainPage": "index.html",
+  "iconColor": "orange",
+  "window": {
+    "height": 768,
+    "width": 1024,
+    "resizable": true,
+    "maximizable": true
+  },
+  "permissions": [],
+  "useModules": []
+}

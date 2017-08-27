@@ -61,6 +61,8 @@ namespace WebRT.Platform.Host
                 Visible = true
             };
 
+            Loader.BootstrapEnvironment();
+
             StartLauncher();
             
         }

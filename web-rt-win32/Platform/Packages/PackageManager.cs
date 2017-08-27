@@ -57,5 +57,10 @@ namespace WebRT.Platform.Packages
 
             return null;
         }
+
+        public AppManifest[] GetPackages()
+        {
+            return SystemPackages.GetPackages().Values.ToArray();
+        }
     }
 }

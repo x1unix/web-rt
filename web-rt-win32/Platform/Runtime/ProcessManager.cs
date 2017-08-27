@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebRT.Foundation;
 
 namespace WebRT.Platform.Runtime
 {
-    class ProcessManager
+    class ProcessManager: Loggable
     {
         private static ProcessManager Instance;
 
@@ -38,6 +39,8 @@ namespace WebRT.Platform.Runtime
 
             LastProcessId = LastProcessId + 0;
 
+            Log($"Created a new process with PID: {process.Id}");
+
             return process;
         }
 
@@ -45,6 +48,7 @@ namespace WebRT.Platform.Runtime
         {
             Processes[processId].Kill(true);
             Processes.Remove(processId);
+            Log($"Process ({processId}) was killed");
         }
          
     }

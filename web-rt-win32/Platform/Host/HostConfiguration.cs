@@ -23,6 +23,7 @@ namespace WebRT.Platform.Host
 
         public HostConfiguration()
         {
+            DebugModeEnabled = false;
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             LogFile = FSHelper.NormalizeLocation($"{currentDirectory}\\log.txt");
             SystemPackagesLocation = FormatPath(currentDirectory, PackagesDirectoryName);

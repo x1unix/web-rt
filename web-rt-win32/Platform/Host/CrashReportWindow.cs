@@ -41,12 +41,12 @@ namespace WebRT.Platform.Host
 
         private void CloseAppButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            // Application.Exit();
         }
 
         private void CrashReportWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            // Application.Exit();
         }
     }
 }

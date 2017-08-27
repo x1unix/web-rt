@@ -3,20 +3,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
-            min-width: 100%;
-            background: #ccc;
-            font: 9.75pt 'Segoe UI', Arial, Helvetica, sans-serif;
-            color: #000;
-        }
-    </style>
+    <title>Launcher</title>
+    <link href="app://styles.css" rel="stylesheet" />
+    <script src="app://karkas.min.js"></script>
 </head>
 <body>
-    Hello World!
+    <div class="app-list" id="appList"></div>
+
+    <script type="text/karkas" name="appListItem">
+        <div class="app-list-item" data-package-name="{{domain}}">
+            <div class="app-list-item__frame" style="background: {{iconColor}}">
+                <img src="app://AppIcon.png" class="app-list-item__icon" />
+            </div>
+            <div class="app-list-item__label">
+                {{name}}
+            </div>
+        </div>
+    </script>
+    <script src="app://app.js"></script>
 </body>
 </html>

@@ -7,10 +7,11 @@ using System.IO;
 using WebRT.Platform.Packages;
 using WebRT.Foundation;
 using System.Windows.Forms;
+using WebRT.Platform.Integration;
 
 namespace WebRT.Platform.Runtime
 {
-    class Launcher
+    class Launcher: Loggable
     {
         private static Launcher Instance;
 
@@ -46,6 +47,8 @@ namespace WebRT.Platform.Runtime
         {
             string viewLocation = FSHelper.NormalizeLocation($"{manifest.Location}\\{manifest.MainPage}");
 
+            Log($"Starting application from package '{manifest.Domain}'");
+
             if (!File.Exists(viewLocation))
             {
                 throw new LauncherException($"Failed to start application '{manifest.Name}' ({manifest.Domain}). View not found.");
@@ -56,10 +59,14 @@ namespace WebRT.Platform.Runtime
             proc.Domain = manifest.Domain;
             proc.DomainPath = manifest.Location;
 
+            // Provide declared dependencies
+            ClientInjector.ProvideDependencies(manifest.RequiredModules, proc);
+
             // TODO: Add icon loader
             proc.Host.ViewName = manifest.MainPage;
             proc.Host.Styles = manifest.Window;
             proc.Host.Label = manifest.Name;
+
 
             proc.Start();
             proc.Host.Show();

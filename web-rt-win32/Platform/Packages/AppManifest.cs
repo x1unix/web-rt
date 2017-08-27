@@ -59,6 +59,9 @@ namespace WebRT.Platform.Packages
         [JsonProperty("iconLarge")]
         public string IconLarge { get; set; }
 
+        [JsonProperty("iconColor")]
+        public string IconColor { get; set; }
+
         /// <summary>
         /// Location of the main page
         /// </summary>
@@ -70,8 +73,11 @@ namespace WebRT.Platform.Packages
         /// <summary>
         /// List of required permissions
         /// </summary>
-        [JsonProperty("requirePermissions")]
-        public string[] RequirePermissions { get; set; }
+        [JsonProperty("permissions")]
+        public string[] RequiredPermissions { get; set; }
+
+        [JsonProperty("useModules")]
+        public string[] RequiredModules { get; set; }
 
         public string Location { get; set; }
 
@@ -79,6 +85,7 @@ namespace WebRT.Platform.Packages
         {
             MainPage = "index.html";
             Window = new AppWindowDefinition();
+            IconColor = "#666";
         }
 
         public static readonly string FileName = "application.json";

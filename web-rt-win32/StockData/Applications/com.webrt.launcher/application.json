@@ -1,7 +1,18 @@
 ﻿{
-  "$schema": "/Platform/Packages/AppManifest.json",
-  "Name": "Application Launcher",
-  "Version": "1.0.0",
-  "Domain": "com.webrt.launcher",
-  "MainPage": "index.html"
+  "name": "Launcher",
+  "version": "1.0.0",
+  "domain": "com.webrt.launcher",
+  "mainPage": "index.html",
+  "iconColor": "dodgerblue",
+  "window": {
+    "height": 500,
+    "width": 320,
+    "resizable": false,
+    "maximizable": false
+  },
+  "permissions": [],
+  "useModules": [
+    "PackageManager",
+    "Launcher"
+  ]
 }
