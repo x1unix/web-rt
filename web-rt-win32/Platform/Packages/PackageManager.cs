@@ -37,11 +37,12 @@ namespace WebRT.Platform.Packages
             SystemPackages = new PackagesRepository(Configuration.SystemPackagesLocation);
         }
 
-        public async Task<AppManifest> GetPackage(string packageDomain)
+
+        public AppManifest GetPackage(string packageDomain)
         {
-            if (await SystemPackages.HasPackage(packageDomain))
+            if (SystemPackages.HasPackage(packageDomain))
             {
-                return await SystemPackages.GetPackage(packageDomain);
+                return SystemPackages.GetPackage(packageDomain);
             }
 
             //if (await GlobalPackages.HasPackage(packageDomain))

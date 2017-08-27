@@ -15,7 +15,7 @@ namespace WebRT.Platform.Host
         private ContextMenu ContentMenu;
         private System.ComponentModel.IContainer Components;
         private static TrayNotifier TrayInstance;
-        private const string LauncherAppName = "com.winrt.launcher";
+        private const string LauncherAppName = "com.webrt.launcher";
 
         public static TrayNotifier GetInstance()
         {
@@ -61,20 +61,26 @@ namespace WebRT.Platform.Host
                 Visible = true
             };
 
-
+            StartLauncher();
             
         }
 
-        private void OnMenuClick(object Sender, EventArgs e)
+        private void StartLauncher()
         {
             try
             {
                 Launcher.GetInstance().StartApplication(LauncherAppName);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 LogError(ex.Message);
                 CrashReportWindow.CreateFromLog().ShowDialog();
             }
+        }
+
+        private void OnMenuClick(object Sender, EventArgs e)
+        {
+            StartLauncher();
         }
 
         private void OnExitClick(object Sender, EventArgs e)

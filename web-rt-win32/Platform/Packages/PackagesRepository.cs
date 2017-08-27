@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using WebRT.Foundation;
+using WebRT.Platform.Runtime;
 
 namespace WebRT.Platform.Packages
 {
@@ -14,6 +15,7 @@ namespace WebRT.Platform.Packages
         protected string Source;
 
         private bool CheckPerformed = false;
+        private bool Cached = false;
 
         protected Dictionary<string, AppManifest> PackagesStore;
 
@@ -38,8 +40,59 @@ namespace WebRT.Platform.Packages
             CheckPerformed = true;
         }
 
-        public async Task<Dictionary<string, AppManifest>> GetPackages()
+        public void CachePackages()
         {
+            Task<Dictionary<string, AppManifest>> task = Task.Run<Dictionary<string, AppManifest>>(async () => await CachePackagesAsync());
+
+            try
+            {
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                string msg = $"Failed to cache packages: {ex.Message}";
+                LogError(msg);
+                throw new RuntimeException(msg);
+            }
+        }
+
+        public Dictionary<string, AppManifest> GetPackages()
+        {
+            if (!Cached)
+            {
+                CachePackages();
+            }
+
+            return PackagesStore;
+        }
+
+        public bool HasPackage(string name)
+        {
+            if (!Cached)
+            {
+                CachePackages();
+            }
+
+            return PackagesStore.ContainsKey(name);
+        }
+
+        public AppManifest GetPackage(string name)
+        {
+            if (!Cached)
+            {
+                CachePackages();
+            }
+
+            return PackagesStore[name];
+        }
+
+        public async Task<Dictionary<string, AppManifest>> CachePackagesAsync()
+        {
+            if (Cached)
+            {
+                return PackagesStore;
+            }
+
             if (PackagesStore == null)
             {
                 CheckRepository();
@@ -53,24 +106,26 @@ namespace WebRT.Platform.Packages
                 }
                 else
                 {
+                    LogInfo($"Fetched {cached.Count} items from cache");
                     PackagesStore = cached;
                 }
 
             }
 
+            Cached = true;
             return PackagesStore;
         }
 
-        public async Task<AppManifest> GetPackage(string packageDomain)
+        public async Task<AppManifest> GetPackageAsync(string packageDomain)
         {
-            Dictionary<string, AppManifest> packages = await GetPackages();
+            Dictionary<string, AppManifest> packages = await CachePackagesAsync();
 
             return packages.ContainsKey(packageDomain) ? packages[packageDomain] : null;
         }
 
-        public async Task<bool> HasPackage(string packageDomain)
+        public async Task<bool> HasPackageAsync(string packageDomain)
         {
-            Dictionary<string, AppManifest> packages = await GetPackages();
+            Dictionary<string, AppManifest> packages = await CachePackagesAsync();
 
             return packages.ContainsKey(packageDomain);
         }

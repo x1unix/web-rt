@@ -20,42 +20,36 @@ namespace WebRT.Platform.Runtime
 
         protected bool DebugMode = true;
 
-        public ApplicationProcess Process;
+        public ApplicationProcess AppProcess;
 
         public Bitmap PreviewImage = null;
 
-        private string ViewURL;
-
-        public string ViewLocation
-        {
-            get
-            {
-                return ViewURL;
-            }
-
-            set
-            {
-                ViewURL = new System.Uri(FSHelper.NormalizeLocation($"{Process.DomainPath}\\{value}")).AbsoluteUri;
-            }
-        }
-
+        public string ViewName;
+        
         private bool WasClosed = false;
 
         public ApplicationHost(ApplicationProcess process)
         {
-            Process = process;
-            Process.ProcessKill += new ApplicationProcess.ProcessEventHandler(OnProcessDie);
-            Process.ProcessCreate += new ApplicationProcess.ProcessEventHandler(OnProcessCreated);
+            AppProcess = process;
+            AppProcess.ProcessKill += new ApplicationProcess.ProcessEventHandler(OnProcessDie);
+            AppProcess.ProcessCreate += new ApplicationProcess.ProcessEventHandler(OnProcessCreated);
         }
 
         protected void InitializeWebView()
         {
             CefSettings settings = new CefSettings();
+
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = AppSchemeHandlerFactory.SchemeName,
+                SchemeHandlerFactory = new AppSchemeHandlerFactory(AppProcess.DomainPath)
+            });
+
             // Initialize cef with the provided settings
 
             Cef.Initialize(settings);
             // Create a browser component
-            WebView = new ChromiumWebBrowser("http://google.com") {
+            WebView = new ChromiumWebBrowser($"{AppSchemeHandlerFactory.SchemeName}://{ViewName}") {
                 Dock = DockStyle.Fill
             };
 
@@ -86,7 +80,7 @@ namespace WebRT.Platform.Runtime
             if (!WasClosed)
             {
                 WasClosed = true;
-                Process.Kill();
+                AppProcess.Kill();
             }
         }
     }

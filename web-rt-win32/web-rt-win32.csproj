@@ -78,6 +78,7 @@
     <Compile Include="Foundation\DebugLogWriter.cs" />
     <Compile Include="Foundation\FSHelper.cs" />
     <Compile Include="Foundation\LogWriter.cs" />
+    <Compile Include="Foundation\AppSchemeHandlerFactory.cs" />
     <Compile Include="Foundation\TextLogWriter.cs" />
     <Compile Include="Platform\Host\CrashReportWindow.cs">
       <SubType>Form</SubType>

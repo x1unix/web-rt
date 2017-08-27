@@ -25,13 +25,9 @@ namespace WebRT.Platform.Runtime
 
         public ApplicationProcess StartApplication(string packageName)
         {
-            Task<AppManifest> task = Task.Run<AppManifest>(async () => await PackageManager.GetInstance().GetPackage(packageName));
-
             try
             {
-                task.Wait();
-
-                AppManifest app = task.Result;
+                AppManifest app = PackageManager.GetInstance().GetPackage(packageName);
 
                 if (app == null)
                 {
@@ -62,10 +58,10 @@ namespace WebRT.Platform.Runtime
             proc.Host.Text = manifest.Name;
 
             // TODO: Add icon loader
-        
-            proc.Host.ViewLocation = viewLocation;
+            proc.Host.ViewName = manifest.MainPage;
 
             proc.Start();
+            proc.Host.Show();
 
             return proc;
         }
