@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using WebRT.Platform.Packages;
 using WebRT.Foundation;
+using System.Windows.Forms;
 
 namespace WebRT.Platform.Runtime
 {
@@ -55,10 +56,10 @@ namespace WebRT.Platform.Runtime
             proc.Domain = manifest.Domain;
             proc.DomainPath = manifest.Location;
 
-            proc.Host.Text = manifest.Name;
-
             // TODO: Add icon loader
             proc.Host.ViewName = manifest.MainPage;
+            proc.Host.Styles = manifest.Window;
+            proc.Host.Label = manifest.Name;
 
             proc.Start();
             proc.Host.Show();

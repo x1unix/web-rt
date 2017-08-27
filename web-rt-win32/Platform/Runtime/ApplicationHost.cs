@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using WebRT.Foundation;
+using WebRT.Platform.Packages;
 
 namespace WebRT.Platform.Runtime
 {
@@ -25,6 +26,10 @@ namespace WebRT.Platform.Runtime
         public Bitmap PreviewImage = null;
 
         public string ViewName;
+
+        public AppWindowDefinition Styles;
+
+        public string Label;
         
         private bool WasClosed = false;
 
@@ -63,6 +68,23 @@ namespace WebRT.Platform.Runtime
             InitializeComponent();
             InitializeWebView();
             Show();
+
+            ApplyStyles();
+        }
+
+        private void ApplyStyles()
+        {
+            if (Styles != null)
+            {
+                Height = Styles.Height;
+                Width = Styles.Width;
+
+                FormBorderStyle = Styles.Resizable ? FormBorderStyle.Sizable : FormBorderStyle.FixedSingle;
+
+                Text = Styles.Title ?? Label;
+
+                MaximizeBox = Styles.Maximizable;
+            }
         }
 
         private void OnProcessDie(ApplicationProcess process, EventArgs e)
