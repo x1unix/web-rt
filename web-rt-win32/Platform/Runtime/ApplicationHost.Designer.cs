@@ -1,6 +1,6 @@
-﻿namespace WebRT
+﻿namespace WebRT.Platform.Runtime
 {
-    partial class Form1
+    partial class ApplicationHost
     {
         /// <summary>
         /// Обязательная переменная конструктора.

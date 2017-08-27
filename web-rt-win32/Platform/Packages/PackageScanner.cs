@@ -132,6 +132,8 @@ namespace WebRT.Platform.Packages
                 {
                     string manifestJson = sb.ToString();
                     AppManifest manifest = JsonConvert.DeserializeObject<AppManifest>(manifestJson);
+                    manifest.Location = Path.GetDirectoryName(filePath);
+
                     return manifest;
                 } catch (Exception ex)
                 {

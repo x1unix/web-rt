@@ -62,7 +62,7 @@ namespace WebRT.Platform.Host
 
         private void OnExitClick(object Sender, EventArgs e)
         {
-            Application.Exit();
+            ApplicationProcess.Exit();
         }
 
         public void Inject()

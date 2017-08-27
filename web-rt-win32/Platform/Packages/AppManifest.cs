@@ -22,6 +22,8 @@ namespace WebRT.Platform.Packages
         /// </summary>
         public string Version { get; set; }
 
+        public string Domain { get; set; }
+
         /// <summary>
         /// Application description
         /// </summary>
@@ -47,10 +49,9 @@ namespace WebRT.Platform.Packages
         /// </summary>
         public string Orientation { get; set; }
 
-        /// <summary>
-        /// Icons
-        /// </summary>
-        public AppIcon[] Icons { get; set; }
+        public string IconSmall { get; set; }
+
+        public string IconLarge { get; set; }
 
         /// <summary>
         /// Location of the main page
@@ -61,6 +62,8 @@ namespace WebRT.Platform.Packages
         /// List of required permissions
         /// </summary>
         public string[] RequirePermissions { get; set; }
+
+        public string Location { get; set; }
 
         public AppManifest()
         {
