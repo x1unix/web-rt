@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebRT.Foundation;
+using WebRT.Platform.Runtime;
 
 namespace WebRT.Platform.Host
 {
-    class TrayNotifier
+    class TrayNotifier: Loggable
     {
         private NotifyIcon Icon;
         private ContextMenu ContentMenu;
         private System.ComponentModel.IContainer Components;
         private static TrayNotifier TrayInstance;
+        private const string LauncherAppName = "com.winrt.launcher";
 
         public static TrayNotifier GetInstance()
         {
@@ -32,6 +35,11 @@ namespace WebRT.Platform.Host
 
         private void InitializeComponent()
         {
+            Logger log = Logger.GetInstance();
+
+            log.Clear();
+            log.WriteRaw($" === WebRT Started, Version {Application.ProductVersion} === ");
+
             MenuItem allAppsItem = new MenuItem("Show All Applications");
             allAppsItem.Click += new EventHandler(OnMenuClick);
 
@@ -52,17 +60,26 @@ namespace WebRT.Platform.Host
                 Text = "Web Runtime",
                 Visible = true
             };
+
+
             
         }
 
         private void OnMenuClick(object Sender, EventArgs e)
         {
-            // TODO: Add menu click handler
+            try
+            {
+                Launcher.GetInstance().StartApplication(LauncherAppName);
+            } catch (Exception ex)
+            {
+                LogError(ex.Message);
+                CrashReportWindow.CreateFromLog().ShowDialog();
+            }
         }
 
         private void OnExitClick(object Sender, EventArgs e)
         {
-            ApplicationProcess.Exit();
+            System.Windows.Forms.Application.Exit();
         }
 
         public void Inject()

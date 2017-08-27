@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebRT.Foundation;
 
 namespace WebRT.Platform.Host
 {
@@ -15,15 +16,18 @@ namespace WebRT.Platform.Host
         public string LocalPackagesLocation { get; set; }
         public string SystemPackagesLocation { get; set; }
         public bool DebugModeEnabled { get; set; }
+        public string LogFile { get; set; }
 
-        public static readonly string LocalRootDirectoryName = ".webrt";
+        public static readonly string LocalRootDirectoryName = ".web-runtime";
         public static readonly string PackagesDirectoryName = "Applications";
 
         public HostConfiguration()
         {
-            this.SystemPackagesLocation = FormatPath(AppDomain.CurrentDomain.BaseDirectory, PackagesDirectoryName);
-            this.GlobalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), PackagesDirectoryName);
-            this.LocalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), PackagesDirectoryName);
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            LogFile = FSHelper.NormalizeLocation($"{currentDirectory}\\log.txt");
+            SystemPackagesLocation = FormatPath(currentDirectory, PackagesDirectoryName);
+            GlobalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), PackagesDirectoryName);
+            LocalPackagesLocation = FormatPath(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), PackagesDirectoryName);
         }
 
         /// <summary>
@@ -34,7 +38,7 @@ namespace WebRT.Platform.Host
         /// <returns></returns>
         private static string FormatPath(string root, string path)
         {
-            return $"{root}\\{LocalRootDirectoryName}\\${path}";
+            return $"{root}\\{LocalRootDirectoryName}\\{path}";
         }
     }
 }

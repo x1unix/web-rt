@@ -22,7 +22,7 @@ namespace WebRT.Platform.Runtime
 
         public ApplicationProcess Process;
 
-        public Bitmap PreviewImage;
+        public Bitmap PreviewImage = null;
 
         private string ViewURL;
 

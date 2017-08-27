@@ -36,5 +36,25 @@ namespace WebRT.Platform.Packages
             LocalPackages = new PackagesRepository(Configuration.LocalPackagesLocation);
             SystemPackages = new PackagesRepository(Configuration.SystemPackagesLocation);
         }
+
+        public async Task<AppManifest> GetPackage(string packageDomain)
+        {
+            if (await SystemPackages.HasPackage(packageDomain))
+            {
+                return await SystemPackages.GetPackage(packageDomain);
+            }
+
+            //if (await GlobalPackages.HasPackage(packageDomain))
+            //{
+            //    return await GlobalPackages.GetPackage(packageDomain);
+            //}
+
+            //if (await LocalPackages.HasPackage(packageDomain))
+            //{
+            //    return await LocalPackages.GetPackage(packageDomain);
+            //}
+
+            return null;
+        }
     }
 }

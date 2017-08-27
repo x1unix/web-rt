@@ -43,7 +43,7 @@ namespace WebRT.Platform.Packages
         /// <returns></returns>
         private string GetCacheFilePath(string directoryPath)
         {
-            return $"{directoryPath}\\${CacheFileName}";
+            return FSHelper.NormalizeLocation($"{directoryPath}\\{CacheFileName}");
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace WebRT.Platform.Packages
         {
             if (!Directory.Exists(dirPath))
             {
-                LogError($"Cache directory doesn't exists: {dirPath}");
-                return false;
+                LogError($"Cache directory doesn't exists: {dirPath}, a new one will be created");
+                Directory.CreateDirectory(dirPath);
             }
 
             string cacheFile = GetCacheFilePath(dirPath);
@@ -70,6 +70,7 @@ namespace WebRT.Platform.Packages
             try
             {
                 formatter.Serialize(fs, items);
+                LogInfo($"{items.Count} items were cached to '{cacheFile}'");
                 success = true;
             } catch (SerializationException ex)
             {
@@ -141,6 +142,11 @@ namespace WebRT.Platform.Packages
             }
 
             FileStream fs = new FileStream(cacheFile, FileMode.Open);
+
+            if (fs.Length == 0)
+            {
+                Log($"Cache file '{cacheFile}' is empty, skipping...");
+            }
 
             Dictionary<string, AppManifest> items = null;
 

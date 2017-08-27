@@ -30,11 +30,6 @@ namespace WebRT.Platform.Packages
         public string Description { get; set; }
 
         /// <summary>
-        /// Package name (ex: com.company.name)
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
         /// Application background color
         /// </summary>
         public string BackgroundColor { get; set; }

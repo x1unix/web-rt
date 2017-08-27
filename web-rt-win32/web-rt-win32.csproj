@@ -75,7 +75,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Foundation\DebugLogWriter.cs" />
     <Compile Include="Foundation\FSHelper.cs" />
+    <Compile Include="Foundation\LogWriter.cs" />
+    <Compile Include="Foundation\TextLogWriter.cs" />
+    <Compile Include="Platform\Host\CrashReportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Platform\Host\CrashReportWindow.Designer.cs">
+      <DependentUpon>CrashReportWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Platform\Runtime\ApplicationHost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +111,9 @@
     <Compile Include="Platform\Runtime\RuntimeException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Platform\Host\CrashReportWindow.resx">
+      <DependentUpon>CrashReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Platform\Runtime\ApplicationHost.resx">
       <DependentUpon>ApplicationHost.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,7 +127,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="StockData\Applications\com.webrt.launcher\application.json" />
     <None Include="packages.config" />
+    <None Include="Platform\Packages\AppManifest.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,15 +144,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StockData\Applications\com.webrt.launcher\index.html" />
     <None Include="Resources\AppIconXS.ico" />
     <None Include="Resources\AppIcon.ico" />
     <None Include="Resources\web-rt.ico" />
     <Content Include="TextTemplate.ico" />
     <Content Include="web-rt.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StockApps\Launcher\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -155,4 +168,15 @@
   <Import Project="..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets')" />
   <Import Project="..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>IF NOT EXIST "$(TargetDir).web-runtime" (
+mkdir "$(TargetDir).web-runtime"
+)
+
+xcopy "$(ProjectDir)StockData" "$(TargetDir).web-runtime" /S /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -23,6 +23,28 @@ namespace WebRT.Platform.Runtime
             return Instance;
         }
 
+        public ApplicationProcess StartApplication(string packageName)
+        {
+            Task<AppManifest> task = Task.Run<AppManifest>(async () => await PackageManager.GetInstance().GetPackage(packageName));
+
+            try
+            {
+                task.Wait();
+
+                AppManifest app = task.Result;
+
+                if (app == null)
+                {
+                    throw new LauncherException($"Failed to start application '{packageName}'. Application not found");
+                }
+
+                return StartApplication(app);
+            } catch(Exception ex)
+            {
+                throw new LauncherException($"Failed to start application '{packageName}'. {ex.Message}");
+            }
+        }
+
         public ApplicationProcess StartApplication(AppManifest manifest)
         {
             string viewLocation = FSHelper.NormalizeLocation($"{manifest.Location}\\{manifest.MainPage}");

@@ -100,7 +100,7 @@ namespace WebRT.Platform.Packages
 
                 if (manifest != null)
                 {
-                    packages.Add(manifest.Id, manifest);
+                    packages.Add(manifest.Domain, manifest);
                 }
             }
 
@@ -114,32 +114,25 @@ namespace WebRT.Platform.Packages
         /// <returns></returns>
         protected async Task<AppManifest> ReadManifestAsync(string filePath)
         {
-            using (FileStream sourceStream = new FileStream(filePath,
-                    FileMode.Open, FileAccess.Read, FileShare.Read,
-                    bufferSize: 4096, useAsync: true))
+            string savePath = FSHelper.NormalizeLocation(filePath);
+            string result;
+
+            using (StreamReader reader = File.OpenText(savePath))
             {
-                StringBuilder sb = new StringBuilder();
+                result = await reader.ReadToEndAsync();
+            }
 
-                byte[] buffer = new byte[0x1000];
-                int numRead;
-                while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-                {
-                    string text = Encoding.Unicode.GetString(buffer, 0, numRead);
-                    sb.Append(text);
-                }
+            try
+            {
+                AppManifest manifest = JsonConvert.DeserializeObject<AppManifest>(result);
+                manifest.Location = Path.GetDirectoryName(filePath);
 
-                try
-                {
-                    string manifestJson = sb.ToString();
-                    AppManifest manifest = JsonConvert.DeserializeObject<AppManifest>(manifestJson);
-                    manifest.Location = Path.GetDirectoryName(filePath);
-
-                    return manifest;
-                } catch (Exception ex)
-                {
-                    LogError($"Corrupted app manifest at '${filePath}'. Error: ${ex.Message}");
-                    return null;
-                }
+                return manifest;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Corrupted app manifest at '{savePath}'. Error: {ex.Message}");
+                return null;
             }
         }
     }

@@ -60,5 +60,19 @@ namespace WebRT.Platform.Packages
 
             return PackagesStore;
         }
+
+        public async Task<AppManifest> GetPackage(string packageDomain)
+        {
+            Dictionary<string, AppManifest> packages = await GetPackages();
+
+            return packages.ContainsKey(packageDomain) ? packages[packageDomain] : null;
+        }
+
+        public async Task<bool> HasPackage(string packageDomain)
+        {
+            Dictionary<string, AppManifest> packages = await GetPackages();
+
+            return packages.ContainsKey(packageDomain);
+        }
     }
 }

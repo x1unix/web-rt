@@ -25,16 +25,35 @@ namespace WebRT.Foundation
 
         public LogLevels LogLevel;
 
+        private LogWriter[] Loggers = { new DebugLogWriter(), new TextLogWriter() };
+
         public Logger()
         {
             LogLevel = LogLevels.Debug;
+        }
+
+        public void Clear()
+        {
+            foreach (var logger in Loggers)
+            {
+                logger.Clear();
+            }
         }
 
         public void Write(LogLevels level, string source, string message)
         {
             if (level <= LogLevel)
             {
-                Debug.WriteLine($"<{source}> [{Enum.GetName(typeof(LogLevels), level)}]: {message}");
+                string text = $"<{source}> [{Enum.GetName(typeof(LogLevels), level)}]: {message}";
+                WriteRaw(text);
+            }
+        }
+
+        public void WriteRaw(string text)
+        {
+            foreach (var logger in Loggers)
+            {
+                logger.Write(text);
             }
         }
 
