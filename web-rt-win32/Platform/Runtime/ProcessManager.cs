@@ -37,7 +37,7 @@ namespace WebRT.Platform.Runtime
 
             Processes.Add(process.Id, process);
 
-            LastProcessId = LastProcessId + 0;
+            LastProcessId = process.Id + 0;
 
             Log($"Created a new process with PID: {process.Id}");
 

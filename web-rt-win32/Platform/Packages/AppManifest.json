@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for WebRT application manifest",
+
+  "type": "object",
+
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "Application name"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Application version"
+    },
+    "Domain": {
+      "type": "string",
+      "description": "Application domain (for ex: com.company.appName)"
+    },
+    "MainPage": {
+      "type": "string",
+      "description": "Main HTML file name"
+    }
+  }
+}
