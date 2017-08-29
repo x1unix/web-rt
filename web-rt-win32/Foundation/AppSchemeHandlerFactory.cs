@@ -36,7 +36,7 @@ namespace WebRT.Foundation
             }
 
             string mime = ResourceHandler.GetMimeType(extension);
-            string path = FSHelper.NormalizeLocation($"{Root}/{location}");
+            string path = FSHelper.NormalizeLocation($"{Root}/{location}"); 
             
             return ResourceHandler.FromFilePath(path, mime);
         }

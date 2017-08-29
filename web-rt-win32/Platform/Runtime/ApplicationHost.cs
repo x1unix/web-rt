@@ -44,21 +44,17 @@ namespace WebRT.Platform.Runtime
             AppProcess.ProcessCreate += new ApplicationProcess.ProcessEventHandler(OnProcessCreated);
         }
 
+        protected string GetResourceFullPath(string resourceName)
+        {
+            return FSHelper.NormalizeLocation($"{AppProcess.DomainPath}\\{resourceName}");
+        }
+
         protected void InitializeWebView()
         {
-            CefSettings settings = new CefSettings();
 
-            settings.RegisterScheme(new CefCustomScheme
-            {
-                SchemeName = AppSchemeHandlerFactory.SchemeName,
-                SchemeHandlerFactory = new AppSchemeHandlerFactory(AppProcess.DomainPath)
-            });
 
-            // Initialize cef with the provided settings
-
-            Cef.Initialize(settings);
             // Create a browser component
-            WebView = new ChromiumWebBrowser($"{AppSchemeHandlerFactory.SchemeName}://{ViewName}") {
+            WebView = new ChromiumWebBrowser(GetResourceFullPath(ViewName)) {
                 Dock = DockStyle.Fill
             };
 
@@ -106,10 +102,10 @@ namespace WebRT.Platform.Runtime
 
         private void OnWebViewInitialised(object sender, IsBrowserInitializedChangedEventArgs e)
         {
-            if (HostConfigurationProvider.GetInstance().GetConfiguration().DebugModeEnabled)
-            {
-                WebView.ShowDevTools();
-            }
+            //if (HostConfigurationProvider.GetInstance().GetConfiguration().DebugModeEnabled)
+            //{
+            //    WebView.ShowDevTools();
+            //}
         }
 
         private void ApplyStyles()
@@ -129,12 +125,7 @@ namespace WebRT.Platform.Runtime
 
         private void OnProcessDie(ApplicationProcess process, EventArgs e)
         {
-            if (!WasClosed)
-            {
-                Close();
-            }
 
-            Cef.Shutdown();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

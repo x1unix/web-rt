@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Launcher</title>
-    <link href="app://styles.css" rel="stylesheet" />
-    <script src="app://karkas.min.js"></script>
+    <link href="styles.css" rel="stylesheet" />
+    <script src="karkas.min.js"></script>
 </head>
 <body>
     <div class="app-list" id="appList"></div>
@@ -13,13 +13,13 @@
     <script type="text/karkas" name="appListItem">
         <div class="app-list-item" data-package-name="{{domain}}">
             <div class="app-list-item__frame" style="background: {{iconColor}}">
-                <img src="app://AppIcon.png" class="app-list-item__icon" />
+                <img src="AppIcon.png" class="app-list-item__icon" />
             </div>
             <div class="app-list-item__label">
                 {{name}}
             </div>
         </div>
     </script>
-    <script src="app://app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
