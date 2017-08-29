@@ -63,8 +63,15 @@ namespace WebRT.Platform.Host
 
             Loader.BootstrapEnvironment();
 
+            Application.ApplicationExit += Application_ApplicationExit;
+
             StartLauncher();
             
+        }
+
+        private void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            Loader.Shutdown();
         }
 
         private void StartLauncher()
