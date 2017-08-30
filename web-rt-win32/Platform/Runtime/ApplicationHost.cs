@@ -80,7 +80,7 @@ namespace WebRT.Platform.Runtime
         {
             //if (HostConfigurationProvider.GetInstance().GetConfiguration().DebugModeEnabled)
             //{
-               WebView.ShowDevTools();
+               //WebView.ShowDevTools();
             //}
         }
 

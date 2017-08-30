@@ -27,7 +27,12 @@ namespace WebRT.Platform.Integration
         {
             Dispatcher = new RequestDispatcher();
 
-            Dispatcher.AddController(new PackageManagerController());
+            RequestController[] controllers = {
+                new PackageManagerController(),
+                new LauncherController()
+            };
+
+            Dispatcher.AddControllers(controllers);
         }
 
         public RequestDispatcher GetMainRequestDispatcher()

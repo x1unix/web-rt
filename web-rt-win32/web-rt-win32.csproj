@@ -87,6 +87,7 @@
     <Compile Include="Foundation\LogWriter.cs" />
     <Compile Include="Foundation\AppSchemeHandlerFactory.cs" />
     <Compile Include="Foundation\TextLogWriter.cs" />
+    <Compile Include="Platform\Extensions\LauncherController.cs" />
     <Compile Include="Platform\Extensions\PackageManagerController.cs" />
     <Compile Include="Platform\Host\CrashReportWindow.cs">
       <SubType>Form</SubType>

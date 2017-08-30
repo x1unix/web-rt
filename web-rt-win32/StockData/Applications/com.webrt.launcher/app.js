@@ -30,4 +30,5 @@ async function getPackages() {
 
 function onItemClick() {
     // Launcher.callActivity(this.dataset.packageName);
+    execSysCall("WebRT.Platform.Launcher", "StartApplication", this.dataset.packageName);
 }
