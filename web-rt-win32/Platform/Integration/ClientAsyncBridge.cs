@@ -9,7 +9,6 @@ namespace WebRT.Platform.Integration
 {
     class ClientAsyncBridge
     {
-        private readonly List<string> LoadedModules;
         private readonly ApplicationProcess CurrentProcess;
 
         public ClientAsyncBridge(ApplicationProcess process)
@@ -17,11 +16,18 @@ namespace WebRT.Platform.Integration
             CurrentProcess = process;
         }
 
-        public string InvokeRuntimeCall(string controller, string action, string args)
+        public string Invoke(string controller, string action, string args)
         {
             return RequestDispatcherProvider.GetInstance()
                 .GetMainRequestDispatcher()
                 .InvokeRequest(CurrentProcess, controller, action, args);
+        }
+
+        public string[] GetHandlersList()
+        {
+            return RequestDispatcherProvider.GetInstance()
+                .GetMainRequestDispatcher()
+                .GetHandlersList();
         }
     }
 }

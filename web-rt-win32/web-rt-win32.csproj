@@ -80,20 +80,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Foundation\Bundle.cs" />
     <Compile Include="Foundation\DebugLogWriter.cs" />
     <Compile Include="Foundation\FSHelper.cs" />
+    <Compile Include="Foundation\Intent.cs" />
     <Compile Include="Foundation\LogWriter.cs" />
     <Compile Include="Foundation\AppSchemeHandlerFactory.cs" />
     <Compile Include="Foundation\TextLogWriter.cs" />
+    <Compile Include="Platform\Extensions\PackageManagerController.cs" />
     <Compile Include="Platform\Host\CrashReportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Platform\Host\CrashReportWindow.Designer.cs">
       <DependentUpon>CrashReportWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Platform\Integration\ClientInjector.cs" />
-    <Compile Include="Platform\Integration\Injectable.cs" />
-    <Compile Include="Platform\Integration\LauncherBinder.cs" />
+    <Compile Include="Platform\Integration\ClientAsyncBridge.cs" />
+    <Compile Include="Platform\Integration\ApplicationHostDecorator.cs" />
+    <Compile Include="Platform\Integration\EnvironmentInformation.cs" />
+    <Compile Include="Platform\Integration\BindController.cs" />
+    <Compile Include="Platform\Integration\RequestController.cs" />
+    <Compile Include="Platform\Integration\RequestDispatcher.cs" />
+    <Compile Include="Platform\Integration\BindAction.cs" />
+    <Compile Include="Platform\Integration\RequestDispatcherProvider.cs" />
+    <Compile Include="Platform\Integration\ActionHandler.cs" />
     <Compile Include="Platform\Loader.cs" />
     <Compile Include="Platform\Packages\AppWindowDefinition.cs" />
     <Compile Include="Platform\Runtime\ApplicationHost.cs">
@@ -108,7 +117,6 @@
     <Compile Include="Platform\Host\HostConfiguration.cs" />
     <Compile Include="Platform\Host\HostConfigurationProvider.cs" />
     <Compile Include="Platform\Host\TrayNotifier.cs" />
-    <Compile Include="Platform\Integration\PackageManagerBinder.cs" />
     <Compile Include="Platform\Packages\AppManifest.cs" />
     <Compile Include="Platform\Packages\AppIcon.cs" />
     <Compile Include="Platform\Packages\PackageCache.cs" />

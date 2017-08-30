@@ -48,5 +48,10 @@ namespace WebRT.Platform.Integration
             return handler(process, data);
         }
 
+        public string[] GetHandlersList()
+        {
+            return Controllers.Keys.ToArray();
+        }
+
     }
 }

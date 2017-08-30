@@ -10,13 +10,13 @@ using WebRT.Platform.Runtime;
 
 namespace WebRT.Platform.Extensions
 {
-    [BindController("com.webrt.pm")]
+    [BindController("WebRT.Platform.PackageManager")]
     class PackageManagerController: RequestController
     {
         [BindAction()]
         public string GetPackagesList(ApplicationProcess invoker, string args)
         {
             return Response(PackageManager.GetInstance().GetPackages());
-        } 
+        }
     }
 }

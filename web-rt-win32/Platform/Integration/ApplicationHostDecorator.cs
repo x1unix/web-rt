@@ -13,7 +13,7 @@ namespace WebRT.Platform.Integration
     {
         public static void PrepareEnvironment(ApplicationProcess process, ChromiumWebBrowser webView)
         {
-            webView.RegisterJsObject("currentProcess", new EnvironmentInformation(process), BindingOptions.DefaultBinder);
+            webView.RegisterJsObject("runtime", new EnvironmentInformation(process), BindingOptions.DefaultBinder);
             webView.RegisterAsyncJsObject("runtimeBridge", new ClientAsyncBridge(process), BindingOptions.DefaultBinder);
         }
     }
