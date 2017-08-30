@@ -59,9 +59,6 @@ namespace WebRT.Platform.Runtime
             proc.Domain = manifest.Domain;
             proc.DomainPath = manifest.Location;
 
-            // Provide declared dependencies
-            ClientInjector.ProvideDependencies(manifest.RequiredModules, proc);
-
             // TODO: Add icon loader
             proc.Host.ViewName = manifest.MainPage;
             proc.Host.Styles = manifest.Window;

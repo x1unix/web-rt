@@ -35,8 +35,6 @@ namespace WebRT.Platform.Runtime
         
         private bool WasClosed = false;
 
-        private Injectable[] InjectedItems;
-
         public ApplicationHost(ApplicationProcess process)
         {
             AppProcess = process;
@@ -58,36 +56,14 @@ namespace WebRT.Platform.Runtime
                 Dock = DockStyle.Fill
             };
 
-            ApplyDependencies();
+            // Add necessary bindings to JS
+            ApplicationHostDecorator.PrepareEnvironment(AppProcess, WebView);
 
             WebView.IsBrowserInitializedChanged += OnWebViewInitialised;
 
             // Add it to the form and fill it to the form window.
             this.Controls.Add(WebView);
 
-        }
-
-        private void ApplyDependencies()
-        {
-            foreach (Injectable dependency in InjectedItems)
-            {
-                // RegisterJsObject
-                if (dependency.Async)
-                {
-                    WebView.RegisterAsyncJsObject(dependency.Name, dependency, BindingOptions.DefaultBinder);
-                } else
-                {
-                    WebView.RegisterJsObject(dependency.Name, dependency, BindingOptions.DefaultBinder);
-                }
-            }
-        }
-
-        public void DefineDependencies(Injectable[] injectables)
-        {
-            if (InjectedItems == null)
-            {
-                InjectedItems = injectables;
-            }
         }
 
         private void OnProcessCreated(ApplicationProcess process, EventArgs e)
@@ -104,7 +80,7 @@ namespace WebRT.Platform.Runtime
         {
             //if (HostConfigurationProvider.GetInstance().GetConfiguration().DebugModeEnabled)
             //{
-            //    WebView.ShowDevTools();
+               WebView.ShowDevTools();
             //}
         }
 

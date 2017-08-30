@@ -14,7 +14,6 @@ namespace WebRT.Platform
 
         public static void BootstrapEnvironment()
         {
-            ClientInjector.DefineDefaultDependencies();
 
             CefSettings settings = new CefSettings();
 
