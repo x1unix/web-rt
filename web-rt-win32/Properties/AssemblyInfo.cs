@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("web-rt-win32")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Web Application Host")]
+[assembly: AssemblyDescription("WebRT Application Host")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("web-rt-win32")]
