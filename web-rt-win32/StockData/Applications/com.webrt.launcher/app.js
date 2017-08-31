@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function execSysCall(handler, action, data) {
-    return await runtimeBridge.invoke(handler, action, data);
+    return await runtime.invoke(handler, action, data);
 }
 
 async function getPackages() {

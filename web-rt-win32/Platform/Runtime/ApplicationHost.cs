@@ -66,6 +66,17 @@ namespace WebRT.Platform.Runtime
 
         }
 
+        public void OpenDevTools()
+        {
+            RunOnUIThread(() => WebView.ShowDevTools());
+        }
+
+        protected void RunOnUIThread(Action action)
+        {
+            ProcessManager.RootThreadTask task = new ProcessManager.RootThreadTask(action);
+            Invoke(task);
+        }
+
         private void OnProcessCreated(ApplicationProcess process, EventArgs e)
         {
             InitializeComponent();

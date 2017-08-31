@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace WebRT.Platform.Integration
 {
-    class EnvironmentInformation
+    class WindowApplication
     {
         public readonly ApplicationProcess CurrentProcess;
 
         public readonly string Version;
 
-        public EnvironmentInformation(ApplicationProcess process)
+        public WindowApplication(ApplicationProcess process)
         {
             CurrentProcess = process;
             Version = Application.ProductVersion;
@@ -33,6 +33,11 @@ namespace WebRT.Platform.Integration
         public bool RequirePermission(string name)
         {
             return false;
+        }
+
+        public void OpenDevTools()
+        {
+            CurrentProcess.Host.OpenDevTools();
         }
         
     }

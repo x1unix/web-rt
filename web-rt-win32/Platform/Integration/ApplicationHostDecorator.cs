@@ -21,8 +21,8 @@ namespace WebRT.Platform.Integration
         /// <param name="webView">Client web view</param>
         public static void PrepareEnvironment(ApplicationProcess process, ChromiumWebBrowser webView)
         {
-            webView.RegisterJsObject("runtime", new EnvironmentInformation(process), BindingOptions.DefaultBinder);
-            webView.RegisterAsyncJsObject("runtimeBridge", new ClientAsyncBridge(process), BindingOptions.DefaultBinder);
+            webView.RegisterJsObject("application", new WindowApplication(process), BindingOptions.DefaultBinder);
+            webView.RegisterAsyncJsObject("runtime", new ClientAsyncBridge(process), BindingOptions.DefaultBinder);
         }
     }
 }
