@@ -7,12 +7,19 @@ using WebRT.Foundation;
 
 namespace WebRT.Platform.Runtime
 {
+    /// <summary>
+    /// Runtime process manager
+    /// </summary>
     class ProcessManager: Loggable
     {
         private static ProcessManager Instance;
 
         public delegate void RootThreadTask();
 
+        /// <summary>
+        /// Get current instance
+        /// </summary>
+        /// <returns></returns>
         public static ProcessManager GetInstance()
         {
             if (Instance == null)
@@ -25,8 +32,15 @@ namespace WebRT.Platform.Runtime
 
         private int LastProcessId = 0;
 
+        /// <summary>
+        /// Process list storage
+        /// </summary>
         private Dictionary<int, ApplicationProcess> Processes = new Dictionary<int, ApplicationProcess>();
 
+        /// <summary>
+        /// Create and register a new empty process
+        /// </summary>
+        /// <returns></returns>
         public ApplicationProcess CreateProcess()
         {
             ApplicationProcess process = new ApplicationProcess(this)
@@ -46,6 +60,10 @@ namespace WebRT.Platform.Runtime
             return process;
         }
 
+        /// <summary>
+        /// Kill process
+        /// </summary>
+        /// <param name="processId">Process ID</param>
         public void KillProcess(int processId)
         {
             Processes[processId].Kill(true);

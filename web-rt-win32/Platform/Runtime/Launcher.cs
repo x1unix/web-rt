@@ -11,6 +11,9 @@ using WebRT.Platform.Integration;
 
 namespace WebRT.Platform.Runtime
 {
+    /// <summary>
+    /// Application process factory
+    /// </summary>
     class Launcher: Loggable
     {
         private static Launcher Instance;
@@ -25,6 +28,11 @@ namespace WebRT.Platform.Runtime
             return Instance;
         }
 
+        /// <summary>
+        /// Start a new application using package name
+        /// </summary>
+        /// <param name="packageName">Package name</param>
+        /// <returns></returns>
         public ApplicationProcess StartApplication(string packageName)
         {
             try
@@ -43,6 +51,11 @@ namespace WebRT.Platform.Runtime
             }
         }
 
+        /// <summary>
+        /// Start a new application using manifest metadata
+        /// </summary>
+        /// <param name="manifest">Application manifest</param>
+        /// <returns></returns>
         public ApplicationProcess StartApplication(AppManifest manifest)
         {
             string viewLocation = FSHelper.NormalizeLocation($"{manifest.Location}\\{manifest.MainPage}");

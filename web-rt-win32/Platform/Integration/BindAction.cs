@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebRT.Platform.Integration
 {
+    /// <summary>
+    /// Action binder decorator
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     class BindAction: Attribute
     {

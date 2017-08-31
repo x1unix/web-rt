@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebRT.Platform.Integration
 {
+    /// <summary>
+    /// Controller binder decorator
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     class BindController: Attribute
     {

@@ -9,8 +9,16 @@ using WebRT.Platform.Runtime;
 
 namespace WebRT.Platform.Integration
 {
+    /// <summary>
+    /// Web view preparation helper
+    /// </summary>
     class ApplicationHostDecorator
     {
+        /// <summary>
+        /// Create a new client-host bridge and bind it to the web view
+        /// </summary>
+        /// <param name="process">Application process</param>
+        /// <param name="webView">Client web view</param>
         public static void PrepareEnvironment(ApplicationProcess process, ChromiumWebBrowser webView)
         {
             webView.RegisterJsObject("runtime", new EnvironmentInformation(process), BindingOptions.DefaultBinder);

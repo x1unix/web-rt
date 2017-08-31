@@ -12,6 +12,9 @@ using WebRT.Foundation;
 
 namespace WebRT.Platform.Packages
 {
+    /// <summary>
+    /// Installed packages scanner
+    /// </summary>
     class PackageScanner: Loggable
     {
         private static PackageScanner Instance;
