@@ -16,7 +16,10 @@ namespace WebRT.Platform.Extensions
         {
             if (invoker.Domain != appName)
             {
-                Launcher.GetInstance().StartApplication(appName);
+                RunOnUIThread(invoker, () =>
+                {
+                    Launcher.GetInstance().StartApplication(appName);
+                });
             }
 
             return null;

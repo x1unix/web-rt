@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Threading;
+using WebRT.Platform.Runtime;
 
 namespace WebRT.Platform.Integration
 {
@@ -30,6 +32,13 @@ namespace WebRT.Platform.Integration
         {
             DefinedReceiverName = receiverName;
         }
+
+        protected void RunOnUIThread(ApplicationProcess process, Action action)
+        {
+            ProcessManager.RootThreadTask task = new ProcessManager.RootThreadTask(action);
+            process.Host.Invoke(task);
+        }
+      
 
         protected string Response(object[] data)
         {

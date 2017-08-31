@@ -11,6 +11,8 @@ namespace WebRT.Platform.Runtime
     {
         private static ProcessManager Instance;
 
+        public delegate void RootThreadTask();
+
         public static ProcessManager GetInstance()
         {
             if (Instance == null)
