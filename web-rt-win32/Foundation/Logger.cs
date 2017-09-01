@@ -44,7 +44,7 @@ namespace WebRT.Foundation
         {
             if (level <= LogLevel)
             {
-                string text = $"<{source}> [{Enum.GetName(typeof(LogLevels), level)}]: {message}";
+                string text = $"[{Enum.GetName(typeof(LogLevels), level)}] <{source}>: {message}";
                 WriteRaw(text);
             }
         }

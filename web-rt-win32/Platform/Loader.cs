@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebRT.Foundation;
 using WebRT.Platform.Integration;
 
 namespace WebRT.Platform
@@ -26,6 +27,9 @@ namespace WebRT.Platform
             // Initialize cef with the provided settings
 
             Cef.Initialize(settings);
+
+            Logger.GetInstance().Log("Loader", "CEF settings initialized");
+            Logger.GetInstance().Info("Loader", "Environment initialized");
         }
 
         public static bool IsInitialized()
@@ -36,6 +40,8 @@ namespace WebRT.Platform
         public static void Shutdown()
         {
             Cef.Shutdown();
+            Logger.GetInstance().Log("Loader", "CEF settings initialized");
+            Logger.GetInstance().Info("Loader", "Environment was shut down gracefully");
         }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Foundation\TextLogWriter.cs" />
     <Compile Include="Platform\Extensions\LauncherController.cs" />
     <Compile Include="Platform\Extensions\PackageManagerController.cs" />
+    <Compile Include="Platform\Extensions\StorageController.cs" />
     <Compile Include="Platform\Host\CrashReportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +149,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="StockData\Applications\com.webrt.files\application.json" />
+    <None Include="StockData\Applications\com.webrt.files\fonts\materialdesignicons-webfont.eot" />
+    <None Include="StockData\Applications\com.webrt.files\fonts\materialdesignicons-webfont.ttf" />
+    <None Include="StockData\Applications\com.webrt.files\fonts\materialdesignicons-webfont.woff" />
+    <None Include="StockData\Applications\com.webrt.files\fonts\materialdesignicons-webfont.woff2" />
     <None Include="StockData\Applications\com.webrt.launcher\application.json" />
     <None Include="packages.config" />
     <None Include="Platform\Packages\AppManifest.json" />
@@ -165,9 +170,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StockData\Applications\com.webrt.files\angular.js" />
+    <Content Include="StockData\Applications\com.webrt.files\fonts\materialdesignicons-webfont.svg" />
     <Content Include="StockData\Applications\com.webrt.files\index.html" />
+    <Content Include="StockData\Applications\com.webrt.files\css\mdi.css" />
     <Content Include="StockData\Applications\com.webrt.files\script.js" />
-    <Content Include="StockData\Applications\com.webrt.files\styles.css" />
+    <Content Include="StockData\Applications\com.webrt.files\css\styles.css" />
     <Content Include="StockData\Applications\com.webrt.launcher\app.js" />
     <Content Include="StockData\Applications\com.webrt.launcher\AppIcon.png" />
     <Content Include="StockData\Applications\com.webrt.launcher\index.html" />
@@ -180,6 +188,7 @@
     <Content Include="web-rt.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Frameworks\" />
     <Folder Include="Platform\Web\" />
     <Folder Include="StockData\Applications\Frameworks\storage.framework\" />
   </ItemGroup>

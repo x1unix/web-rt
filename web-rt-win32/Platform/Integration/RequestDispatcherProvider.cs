@@ -11,6 +11,12 @@ namespace WebRT.Platform.Integration
     {
         private static RequestDispatcherProvider Instance;
 
+        private static RequestController[] Controllers = {
+            new PackageManagerController(),
+            new StorageController(),
+            new LauncherController()
+        };
+
         public static RequestDispatcherProvider GetInstance()
         {
             if (Instance == null)
@@ -27,12 +33,7 @@ namespace WebRT.Platform.Integration
         {
             Dispatcher = new RequestDispatcher();
 
-            RequestController[] controllers = {
-                new PackageManagerController(),
-                new LauncherController()
-            };
-
-            Dispatcher.AddControllers(controllers);
+            Dispatcher.AddControllers(Controllers);
         }
 
         public RequestDispatcher GetMainRequestDispatcher()

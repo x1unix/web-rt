@@ -15,7 +15,7 @@
     }
 }
 
-.app-list {
+.fm-list {
     display: flex;
     position: absolute;
     top: 0;
@@ -30,7 +30,7 @@
     flex-wrap: wrap;
 }
 
-.app-list-item {
+.fm-list-item {
     display: inline-block;
     background: transparent;
     border-radius: 4px;
@@ -44,20 +44,23 @@
     animation: pop-in 0.2s ease-in;
 }
 
-.app-list-item:hover {
+.fm-list-item:hover {
     background: #ccc;
 }
 
-.app-list-item__icon {
+.fm-list-item__icon {
+    display: inline-block;
     position: absolute;
-    height: 24px;
-    width: 24px;
+    font-size: 24px;
+    color: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.app-list-item__frame {
+
+
+.fm-list-item__frame {
     position: relative;
     height: 32px;
     width: 32px;
@@ -67,7 +70,15 @@
     border-radius: 50%;
 }
 
-.app-list-item__label {
+.fm-list-item__frame--folder {
+    background: orange;
+}
+
+.fm-list-item__frame--file {
+    background: dodgerBlue;
+}
+
+.fm-list-item__label {
     text-align: center;
     font-size: 9pt;
     margin-top: 3px;

@@ -72,10 +72,12 @@ namespace WebRT.Platform.Host
         private void Application_ApplicationExit(object sender, EventArgs e)
         {
             Loader.Shutdown();
+            LogInfo("WebRT was terminated...");
         }
 
         private void StartLauncher()
         {
+            LogInfo("Starting default activity...");
             try
             {
                 Launcher.GetInstance().StartApplication(LauncherAppName);

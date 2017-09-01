@@ -4,10 +4,38 @@
 <head>
     <meta charset="utf-8" />
     <title>File Manager</title>
-    <link href="styles.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/mdi.css" rel="stylesheet" />
+    <style>[ng-cloak] { display: none; }</style>
 </head>
 <body>
-    <center>File Manager is not ready, yet</center>
+    <div class="fm" ng-app="FileManager" ng-cloak>
+        <div class="fm-list" ng-controller="FilesListController as vm">
+            <div class="fm-list-item" ng-repeat="folder in vm.folders" ng-click="vm.navigate(folder)">
+                <div class="fm-list-item__frame fm-list-item__frame--folder">
+                    <!--<img src="AppIcon.png" class="app-list-item__icon" />-->
+                    <i class="mdi mdi-folder fm-list-item__icon"></i>
+                </div>
+                <div class="fm-list-item__label">
+                    {{folder}}
+                </div>
+            </div>
+
+            <div class="fm-list-item" ng-repeat="file in vm.files">
+                <div class="fm-list-item__frame fm-list-item__frame--file">
+                    <!--<img src="AppIcon.png" class="app-list-item__icon" />-->
+                    <i class="mdi mdi-file fm-list-item__icon"></i>
+                </div>
+                <div class="fm-list-item__label">
+                    {{file}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // window.application.openDevTools();
+    </script>
+    <script src="angular.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
