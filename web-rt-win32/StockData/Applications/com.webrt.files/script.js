@@ -27,6 +27,7 @@ angular.module('FileManager', [])
     .controller('FilesListController', ['storage', '$scope', function (storage, $scope) {
         this.folders = [];
         this.files = [];
+        this.currentDir = 'Home';
 
         this.$onInit = () => {
             this.getRoot();
@@ -38,7 +39,10 @@ angular.module('FileManager', [])
         };
 
         this.navigate = async function (path) {
+            this.currentDir = path;
             this.folders = await storage.getDirectories(path);
             this.files = await storage.getFiles(path);
+
+            $scope.$apply();
         };
     }]);

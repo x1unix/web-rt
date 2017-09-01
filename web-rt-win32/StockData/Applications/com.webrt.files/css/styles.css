@@ -16,32 +16,28 @@
 }
 
 .fm-list {
+    margin-top: 45px;    
     display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    min-width: 100%;
     background: #fff;
     font: 9.75pt 'Segoe UI', Arial, Helvetica, sans-serif;
     color: #333;
     overflow: auto;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .fm-list-item {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     background: transparent;
     border-radius: 4px;
     width: auto;
-    height: 73px;
     padding: 10px;
-    margin: 15px;
+    margin: 5px;
     cursor: pointer;
     user-select: none;
     transition: background 0.3s ease-out 0s;
-    animation: pop-in 0.2s ease-in;
+    align-items: center;
 }
 
 .fm-list-item:hover {
@@ -68,6 +64,7 @@
     background: dodgerBlue;
     padding: 10px;
     border-radius: 50%;
+    animation: pop-in 0.2s ease-in;
 }
 
 .fm-list-item__frame--folder {
@@ -79,8 +76,25 @@
 }
 
 .fm-list-item__label {
-    text-align: center;
-    font-size: 9pt;
-    margin-top: 3px;
+    flex: 1;
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 12pt;
+    margin-left: 15px;
     white-space:nowrap;
+}
+
+.fm-nav {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #888;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12pt;
+    padding: 10px;
 }

@@ -11,6 +11,7 @@
 <body>
     <div class="fm" ng-app="FileManager" ng-cloak>
         <div class="fm-list" ng-controller="FilesListController as vm">
+            <div class="fm-nav">{{vm.currentDir}}</div>
             <div class="fm-list-item" ng-repeat="folder in vm.folders" ng-click="vm.navigate(folder)">
                 <div class="fm-list-item__frame fm-list-item__frame--folder">
                     <!--<img src="AppIcon.png" class="app-list-item__icon" />-->
